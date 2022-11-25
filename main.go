@@ -1,9 +1,10 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"html/template"
-	"log"
+
+	//"log"
 	"net/http"
 )
 
@@ -12,7 +13,7 @@ var templates = template.Must(template.ParseGlob("templates/*"))
 func main() {
 	http.HandleFunc("/", Start)
 
-	log.Println("Server running...")
+	fmt.Println("Server running...")
 
 	http.ListenAndServe(":8080", nil)
 }

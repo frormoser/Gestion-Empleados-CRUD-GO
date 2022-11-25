@@ -29,22 +29,66 @@ func ConnectionDB() (conexion *sql.DB) {
 func main() {
 	http.HandleFunc("/", Start)
 	http.HandleFunc("/add", Add)
-	fmt.Println("Server running...")
+	http.HandleFunc("/insert", Insert)
 
+	fmt.Println("Server running...")
 	http.ListenAndServe(":8080", nil)
 }
+
+type Empleado struct {
+	Id     int
+	Nombre string
+	Correo string
+}
+
 func Start(w http.ResponseWriter, r *http.Request) {
 
 	conexionEstablecida := ConnectionDB()
-	insertarRegistros, err := conexionEstablecida.Prepare("INSERT INTO empleados(nombre,correo) VALUES('javier', 'correo@gmail.com')")
+
+	registros, err := conexionEstablecida.Query("SELECT * FROM empleados")
 
 	if err != nil {
 		panic(err.Error())
 	}
-	insertarRegistros.Exec()
-	templates.ExecuteTemplate(w, "home", nil)
+
+	empleado := Empleado{}
+	arrayEmpleado := []Empleado{}
+
+	for registros.Next() {
+		var id int
+		var nombre, correo string
+		err = registros.Scan(&id, &nombre, &correo)
+		if err != nil {
+			panic(err.Error())
+		}
+		empleado.Id = id
+		empleado.Nombre = nombre
+		empleado.Correo = correo
+
+		arrayEmpleado = append(arrayEmpleado, empleado)
+	}
+	fmt.Println(arrayEmpleado)
+
+	templates.ExecuteTemplate(w, "home", arrayEmpleado)
 }
 
 func Add(w http.ResponseWriter, r *http.Request) {
 	templates.ExecuteTemplate(w, "add", nil)
+}
+
+func Insert(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		name := r.FormValue("name")
+		email := r.FormValue("email")
+
+		conexionEstablecida := ConnectionDB()
+		insertarRegistros, err := conexionEstablecida.Prepare("INSERT INTO empleados(name,email) VALUES('?', '?')")
+
+		if err != nil {
+			panic(err.Error())
+		}
+		insertarRegistros.Exec(name, email)
+
+		http.Redirect(w, r, "/", 301)
+	}
 }

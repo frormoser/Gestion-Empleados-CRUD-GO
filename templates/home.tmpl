@@ -20,7 +20,12 @@
           <td> {{.Id}} </td>
           <td> Fede R {{.Nombre}} </td>
           <td> joelrormoser@gmail.com {{.Correo}} </td>
-          <td> Editar | Borrar {{.Id}} </td>
+          <td> Editar {{.Id}} | 
+            
+            <a name="" id="" class="btn btn-danger" href="/delete?id={{.Id}}" role="button">Borrar</a>
+    
+          
+          </td>
         <tr>
 
     {{end}}

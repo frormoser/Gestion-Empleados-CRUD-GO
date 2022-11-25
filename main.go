@@ -30,9 +30,15 @@ func main() {
 	http.HandleFunc("/", Start)
 	http.HandleFunc("/add", Add)
 	http.HandleFunc("/insert", Insert)
+	http.HandleFunc("/delete", Delete)
 
 	fmt.Println("Server running...")
 	http.ListenAndServe(":8080", nil)
+}
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	idEmpleado := r.URL.Query().Get("id")
+	fmt.Println(idEmpleado)
 }
 
 type Empleado struct {
@@ -67,7 +73,7 @@ func Start(w http.ResponseWriter, r *http.Request) {
 
 		arrayEmpleado = append(arrayEmpleado, empleado)
 	}
-	fmt.Println(arrayEmpleado)
+	//fmt.Println(arrayEmpleado)
 
 	templates.ExecuteTemplate(w, "home", arrayEmpleado)
 }

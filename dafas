@@ -1,0 +1,23 @@
+[33mcommit 11503465206042a18c7c12df7952cf211b80bcf3[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Federico Rormoser <joelrormoser@gmail.com>
+Date:   Fri Nov 25 14:06:42 2022 -0300
+
+    database connection
+
+[33mcommit 99f2979ecff20d190b5632cdfde1f63113bf590a[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Federico Rormoser <joelrormoser@gmail.com>
+Date:   Fri Nov 25 09:59:07 2022 -0300
+
+    add employee form
+
+[33mcommit ee9e38b9b1096363cd927a1ea375581013228b6d[m
+Author: Federico Rormoser <joelrormoser@gmail.com>
+Date:   Fri Nov 25 09:42:12 2022 -0300
+
+    add head and footer
+
+[33mcommit 6c9bd70a995e5fe1122e1a6f6b76c3844697fc2d[m
+Author: Federico Rormoser <joelrormoser@gmail.com>
+Date:   Fri Nov 25 09:12:42 2022 -0300
+
+    first templates
